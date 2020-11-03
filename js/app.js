@@ -16,8 +16,9 @@ var clicks = 0;
 var myContainer = document.getElementById('container');
 var imgOneEl = document.getElementById('image-one');
 var imgTwoEl = document.getElementById('image-two');
-// var imgThreeEl = document.getElementById ('image-three');
+var imgThreeEl = document.getElementById('image-three');
 var myList = document.getElementById('list');
+var renderQ = [];
 
 
 //constructor
@@ -59,21 +60,35 @@ new Product('wine-glass');
 
 
 
-console.log(getRandomProductsIndex());
+// console.log(getRandomProductsIndex());
+function populateRenderQ() {
+  renderQ = [];
+  while (renderQ.length < 3) {
+    var uniqueProd = getRandomProductsIndex();
+    while (renderQ.includes(uniqueProd)) {
+      uniqueProd = getRandomProductsIndex();
+    }
+    renderQ.push(uniqueProd);
+  }
+  console.log(renderQ);
+}
+
 
 function renderallProducts() {
-  var productOne = getRandomProductsIndex(); //this is an INDEX
-  var productTwo = getRandomProductsIndex(); //this is an INDEX
-  // var productThree = getRandomProductsIndex();
+  populateRenderQ();
+  var productOne = renderQ[0];
+  var productTwo = renderQ[1];
+  var productThree = renderQ[2];
   // with three indexes this gets more complex!!! maybe use an array, maybe see if the index in question is included in that array, if it is, choose another index
   // NOTE:  we've used myArray.push.  how do you remove something from an array? how do we add something to the FRONT of an array?  remove from the FRONT, how do you remove from the BACK?
   // *** I found splice() to remove arbitrary item, shift() to remove from beginning and pop() to remove from end
 
-
-  while (productOne === productTwo) {
-    productTwo = getRandomProductsIndex();
-    // productThree = getRandomProductsIndex();
-  }
+  // THIS WHILE LOOP IS NO LONGER NEEDED BECAUSE AN ARRAY WAS CREATED WITH A UNIQUE PRODUCT
+  // while (productOne === productTwo) {
+  //   productTwo = getRandomProductsIndex();
+  //   // if (productThreee === productTwo || productOne) {
+  //   //     productThree = getRandomProductsIndex();
+  // }
 
   imgOneEl.src = allProducts[productOne].source;
   imgOneEl.alt = allProducts[productOne].name;
@@ -83,12 +98,13 @@ function renderallProducts() {
   imgTwoEl.alt = allProducts[productTwo].name;
   allProducts[productTwo].views++;
 
-  // imgThreeEl.src = allProducts[productThree].source;
-  // imgThreeEl.alt = allProducts[productThree].name;
+  imgThreeEl.src = allProducts[productThree].source;
+  imgThreeEl.alt = allProducts[productThree].name;
+  allProducts[productThree].views++;
 
 }
 
-function renderResults(){
+function renderResults() {
   for (var i = 0; i < allProducts.length; i++) {
     // create element
     var li = document.createElement('li');
@@ -109,9 +125,9 @@ function handleClick(event) {
   var clickedProduct = event.target.alt;
   clicks++;
 
-  for (var i = 0; i < allProducts.length; i++){
+  for (var i = 0; i < allProducts.length; i++) {
     // we are looking at ALL the name properties inside the product array and comparing them to our image alt property
-    if(clickedProduct === allProducts[i].name){
+    if (clickedProduct === allProducts[i].name) {
       // if true, we KNOW we have the correct product and we can increment its votes!
       allProducts[i].votes++;
     }
@@ -120,7 +136,7 @@ function handleClick(event) {
 
   renderallProducts();
   if (clicks === totalClicksAllowed) {
-  // remove event listener takes parameters: event, and the callback functions.
+    // remove event listener takes parameters: event, and the callback functions.
     myContainer.removeEventListener('click', handleClick);
     // renders our results in a list
     renderResults();
