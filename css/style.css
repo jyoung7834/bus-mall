@@ -1,18 +1,32 @@
-h1, h3, ul {
-  text-align: center;
+h1 {
+  font-size: xx-large;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 
 
+
+h1, h3, ul {
+  text-align: center;
+  color: cornsilk
+
+}
+
+
+
+
+
+
 body {
-  background-color: rgb(64, 160, 192);
+  background-color: #004764;
 
 }
 
 section {
   width: 80%;
   margin: auto;
-  border: 3px solid yellow;
+  border: 3px solid #F6D55C;
   height: 400px;
   padding-top: 50px;
 
