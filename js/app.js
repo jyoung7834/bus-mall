@@ -18,6 +18,9 @@ var imgOneEl = document.getElementById('image-one');
 var imgTwoEl = document.getElementById('image-two');
 var imgThreeEl = document.getElementById('image-three');
 var myList = document.getElementById('list');
+var view = [];
+var selections = [];
+var productlabels = [];
 var renderQ = [];
 
 
@@ -61,8 +64,10 @@ new Product('wine-glass');
 
 // console.log(getRandomProductsIndex());
 function populateRenderQ() {
-  renderQ = [];
-  while (renderQ.length < 3) {
+  while (renderQ.length > 3) {
+    renderQ.shift();
+  }
+  while (renderQ.length < 6) {
     var uniqueProd = getRandomProductsIndex();
     while (renderQ.includes(uniqueProd)) {
       uniqueProd = getRandomProductsIndex();
@@ -70,6 +75,14 @@ function populateRenderQ() {
     renderQ.push(uniqueProd);
   }
   // console.log(renderQ);
+}
+
+function retrieveData() {
+  for (var i = 0; i < allProducts.length; i++) {
+    view.push(allProducts[i].views);
+    productlabels.push(allProducts[i].name);
+    selections.push(allProducts[i].votes);
+  }
 }
 
 
@@ -132,11 +145,13 @@ function handleClick(event) {
     }
   }
 
-
+  console.log(view, selections, productlabels);
   renderallProducts();
   if (clicks === totalClicksAllowed) {
     // remove event listener takes parameters: event, and the callback functions.
     myContainer.removeEventListener('click', handleClick);
+    retrieveData();
+    renderChart();
     // renders our results in a list
     renderResults();
   }
@@ -154,3 +169,41 @@ function handleClick(event) {
 //event listener takes 2 parameters: event, and the callback function
 
 myContainer.addEventListener('click', handleClick);
+
+
+
+// chart javascript
+
+
+var ctx = document.getElementById('myChart').getContext('2d');
+function renderChart() {
+
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: productlabels,
+      datasets: [{
+        label: '# of Votes',
+        data: selections,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+      }, {
+        label: '# of View',
+        data: view,
+        backgroundColor: 'rgba(150, 98, 131, 0.2)',
+        borderColor: 'rgba(150, 98, 131, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}
