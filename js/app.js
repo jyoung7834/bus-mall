@@ -36,7 +36,6 @@ function getRandomProductsIndex() {
 }
 
 //executable code
-new Product('bag');
 new Product('banana');
 new Product('bag');
 new Product('bathroom');
@@ -70,7 +69,7 @@ function populateRenderQ() {
     }
     renderQ.push(uniqueProd);
   }
-  console.log(renderQ);
+  // console.log(renderQ);
 }
 
 
