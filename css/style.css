@@ -5,8 +5,6 @@ h1 {
 }
 
 
-
-
 h1, h3, ul {
   text-align: center;
   color:lightblue
@@ -15,12 +13,25 @@ h1, h3, ul {
 
 section {
   text-align: center;
+ 
 }
 
-div {
+canvas {
+  background-color:snow;
+  
+  
   
 }
 
+#chartid {
+  width: 460px;
+  height: 400px;
+  margin: auto;
+}
+
+#list {
+  padding-top: 5em;
+}
 
 
 
@@ -32,7 +43,7 @@ body {
 section {
   width: 80%;
   margin: auto;
-  border: 3px solid #F6D55C;
+  border: 10px solid #F6D55C;
   height: 400px;
   padding-top: 50px;
 
