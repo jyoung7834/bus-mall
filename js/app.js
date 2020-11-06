@@ -6,7 +6,7 @@
 // // we will track our clicks
 // when we hit 10 clicks, remove event listener - close polls
 // when the polls have closed, we render the results
-// te results will be the name of the product, the number of times it was viewed, and number of votes received
+// the results will be the name of the product, the number of times it was viewed, and number of votes received
 
 
 //global variables
@@ -161,9 +161,6 @@ function handleClick(event) {
 
 
 // console.log(getRandomProductsIndex());
-
-
-
 
 
 //event listener takes 2 parameters: event, and the callback function
