@@ -38,28 +38,33 @@ function getRandomProductsIndex() {
   return Math.floor(Math.random() * allProducts.length);
 }
 
-//executable code
-new Product('banana');
-new Product('bag');
-new Product('bathroom');
-new Product('boots');
-new Product('breakfast');
-new Product('bubblegum');
-new Product('chair');
-new Product('cthulhu');
-new Product('dog-duck');
-new Product('dragon');
-new Product('pen');
-new Product('pet-sweep');
-new Product('scissors');
-new Product('shark');
-new Product('sweep');
-new Product('tauntaun');
-new Product('unicorn');
-new Product('usb');
-new Product('water-can');
-new Product('wine-glass');
-
+var retrievedResults = localStorage.getItem('productResults');
+if (retrievedResults) {
+  var parsendRetrievedResults = JSON.parse(retrievedResults);
+  allProducts = parsendRetrievedResults;
+} else {
+  //executable code
+  new Product('banana');
+  new Product('bag');
+  new Product('bathroom');
+  new Product('boots');
+  new Product('breakfast');
+  new Product('bubblegum');
+  new Product('chair');
+  new Product('cthulhu');
+  new Product('dog-duck');
+  new Product('dragon');
+  new Product('pen');
+  new Product('pet-sweep');
+  new Product('scissors');
+  new Product('shark');
+  new Product('sweep');
+  new Product('tauntaun');
+  new Product('unicorn');
+  new Product('usb');
+  new Product('water-can');
+  new Product('wine-glass');
+}
 
 
 // console.log(getRandomProductsIndex());
@@ -154,6 +159,9 @@ function handleClick(event) {
     renderChart();
     // renders our results in a list
     renderResults();
+
+    var stgringifiedResults = JSON.stringify(allProducts);
+    localStorage.setItem('productResults', stgringifiedResults);
   }
 
   // console.log(clickedProduct);
