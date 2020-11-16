@@ -150,7 +150,7 @@ function handleClick(event) {
     }
   }
 
-  console.log(view, selections, productlabels);
+  // console.log(view, selections, productlabels);
   renderallProducts();
   if (clicks === totalClicksAllowed) {
     // remove event listener takes parameters: event, and the callback functions.
@@ -178,6 +178,7 @@ function handleClick(event) {
 
 myContainer.addEventListener('click', handleClick);
 
+// viewResults.addEventListener('click', handleClick);
 
 
 // chart javascript
